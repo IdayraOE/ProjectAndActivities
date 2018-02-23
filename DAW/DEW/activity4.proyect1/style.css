@@ -1,0 +1,37 @@
+#stage{
+	position: absolute;
+	background-color: #9B92F2;
+	top: 10%;
+	left: 30%;
+	width: 700px;
+	height: 520px;
+	
+}
+
+
+.block{
+	position: relative;
+	display:inline-flex;
+	background-color: #92F2EE;
+	width:80px;
+	height:30px;
+	margin-left:5px;
+	left: 100px;
+}
+
+.ball{
+	position: absolute;
+	background-color:blue;
+	width:20px;
+	height:20px;
+	/*top: 480px;	*/
+	bottom: 20px;
+	border-radius: 20px 20px;
+}
+.bar{
+	position: absolute;
+	background-color:yellow;
+	width:60px;
+	height:20px;
+	bottom: 0px;
+}

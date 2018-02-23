@@ -1,0 +1,70 @@
+.container {
+	position: absolute;
+	 display: inline-flex;
+  	justify-content: center;
+  	padding-right: 10px;
+	left: 25%;
+	top:0px;
+}
+.container div{
+	display: flex;
+  	justify-content: center;
+	/*background-color: pink;*/
+	margin-left: 20px;
+	width: 90px;
+	height: 80px;
+	font-size: 100px;
+}
+.letterGoal{
+	position: absolute;
+	display: inline-flex;
+	padding-right: 10px;
+	top:780px;
+	left: 25%;
+}
+.divGoal{
+	display: flex;
+  	justify-content: center;
+	background-color: pink;
+	margin-left: 20px;
+	width: 90px;
+	height: 5px;
+}
+.img{
+	position: absolute;
+	width: 25%;
+	top: 50px;
+	left: 35%;
+}
+
+.timeDes{
+	position: absolute;
+	float: left;
+	width: 25%;
+	top: 50px;
+	left: 35%;
+	background-color: #67E28F;
+}
+
+.time{
+	position: absolute;
+	top: 50px;
+	left: 70%;
+}
+.timeImg{
+	position: absolute;
+	width: 30px;
+	top: 50px;
+	left: 75%;
+}
+.rotate{
+	position: absolute;
+	top: 50px;
+	left: 90%;
+}
+.rotateImg{
+	position: absolute;
+	width: 30px;
+	top: 50px;
+	left: 95%;
+}

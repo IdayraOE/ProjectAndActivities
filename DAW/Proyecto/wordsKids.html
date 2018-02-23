@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Words Kids</title>
+	<link rel="stylesheet" type="text/css" href="wordsKids.css">
+ 
+</head>
+<body>
+<h1>WORDS KIDS</h1>
+<div class="divimg">
+<!--<img src="dog.jpg" id="img" class="img">-->
+</div>
+<img src="rotar.png" class="rotateImg">
+<img src="cronometro.png" class="timeImg">
+
+<input type="checkbox" name="time" class="time" id="time" value="time">
+<input type="checkbox" name="rotate" class="rotate" id="rotate" value="rotate">
+
+<div class="timeDes" id="timeDes"></div>
+<!--<div class="letter" id="letter"></div>-->
+<div class="letterGoal" id="letterGoal"></div>
+<div class="container">
+</div>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="wordsKids.js"></script>
+<script>
+  var words=['VACA','GATO','PERRO','ERIZO','TORTUGA','CAMALEON'];
+   var random= words[Math.floor(Math.random() * words.length)];
+
+         switch(random) {
+          case 'VACA':
+              $(".divimg").append('<img src="vaca.png" id="img" class="img">');
+              break;
+          case 'GATO':
+             $(".divimg").append('<img src="cat.png" id="img" class="img">');
+              break;
+          case 'PERRO':
+             $(".divimg").append('<img src="dog.png" id="img" class="img">');
+              break;
+          case 'ERIZO':
+             $(".divimg").append('<img src="erizo.jpg" id="img" class="img">');
+              break;
+          case 'TORTUGA':
+             $(".divimg").append('<img src="turtle.png" id="img" class="img">');
+              break;
+          case 'CAMALEON':
+             $(".divimg").append('<img src="camaleon.jpg" id="img" class="img">');
+              break;
+          default:
+            $(".divimg").append('<img src="dog.jpg" id="img" class="img">');
+      }
+
+
+      $( "#img" ).click(function() { 
+          console.log(random);
+            var letter = random.split("");
+         if (document.getElementById('time').checked || document.getElementById('rotate').checked) {
+            inicio();
+         }
+
+            for (var j = 0; j < letter.length; j++) {
+                $(".container").append("<div class='"+letter[j]+"' id='letter' value='"+letter[j]+"'>"+letter[j]+"</div>");
+                $(".container div").css({"left" : "-=30"});
+                $(".letterGoal").append('<div class="divGoal"></div>');
+                $(".divGoal").css({"left" : "+=30"});
+                   
+                var letterPos=10;
+                var letterY=10;
+
+                
+
+              var interval=setInterval(function(){        
+                letterPos=letterPos+letterY;
+
+                  $(".container").css({"top" : "+=10"});
+
+                    if(letterPos>=700){
+                          alert("GAME OVER");  
+                        clearInterval(interval);
+                      }/*else{
+                        
+                      }*/
+                     console.log(letterPos);
+                }, 2000);
+              }  
+           var word=[];
+
+                          for (var i = 0; i < letter.length; i++) {
+                            word.push(letter[i]);
+                            console.log(word);
+                          }
+                          var wordAnswer=[];
+                          $(document).keydown(function( event ) {
+                            
+                            var key=String.fromCharCode(event.which);
+
+                            wordAnswer.push(key);
+                            console.log(wordAnswer);
+
+                            if (JSON.stringify(word)==JSON.stringify(wordAnswer)) {
+                                alert("¡Muy bien!");
+                                clearInterval(interval);
+                            }/*else{
+                              alert("Palabra erronea");
+                            }*/
+                         }); 
+
+      });
+
+</script>
+</body>
+</html>

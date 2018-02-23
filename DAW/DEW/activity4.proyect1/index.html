@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="style.css">
     <title>Activity 4: Arkanoid</title>
   </head>
   <body>
@@ -27,5 +27,150 @@
         <li>(1.5 points) Make the ball interact with the vaus</li>
         <li>(3.5 points) Make the ball collide with the bricks, each time the ball hits a brick it might change direction and the brick reduces 1 life. The brick dissapears (preserving the space it occupies) when it get to 0 lifes.</li>
       </ul>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+    var stage=[
+      [{life:1},{life:2},{life:3}],
+      [{life:1},{life:2},{life:3}],
+      [{life:1},{life:2},{life:3}],
+      [{life:1},{life:2},{life:3}],
+      [{life:1},{life:2},{life:3}],
+      [{life:1},{life:2},{life:3}],
+    ];
+    $("#stage").ready(function() {
+
+    /*var row=3;
+    var column=6;
+
+    for (var i = 0; i < row; i++) {
+       $("#stage").append("<br>");
+      for (var j = 0; j < column; j++) {
+        $("#stage").append("<div class='b' data-life='Math.floor((Math.random() * 3) + 1);'></div>");
+
+      }       
+     } */
+
+     for (var i = 0; i < stage[0].length; i++) {
+       
+      $("#stage").append("<br>");
+      for (var j = 0; j < stage.length; j++) {
+        $("#stage").append("<div class='block' data-life=stage[i][j]></div>");
+        $("#stage").click(function(){
+              console.log($(this).find(".block").attr("data-life"));
+          });
+      }       
+     }
+     //$("#3").append("<div style='background-color:pink;width:20px;height:10px;aling:center;'></div><br>");
+     //var life=
+     $("#stage").append("<div class='ball' id='ball'></div>");
+     $("#stage").append("<div class='bar' id='bar'></div>");
+    });
+
+
+
+    $(document).keydown(function( event ) {
+        if ( event.which == 37) {
+          $(".bar").css({"left" : "-=10"});
+      }
+
+      if ( event.which == 39) {
+          $(".bar").css({"left": "+=10"});
+      }
+    });
+
+    $(document).keydown(function( event ) {
+        if ( event.which == 32) {
+        
+          var ballPos=0;
+          var y=document.getElementById('stage').offsetTop;
+          var x=document.getElementById('stage').offsetWidth;
+          var ballY=document.getElementById('ball').offsetWidth;
+          var ballX=document.getElementById('ball').offsetWidth;
+          var velX=1;
+          var velY=-1;
+          var posX;
+          var posY;
+
+      setInterval(function(){ 
+          posX=posx+velX;
+          posY=posY+velY;
+        //$(".ball").css({ "top": velY});
+        
+        /*if (velY-ballY<-y) {
+          velY=-velY;
+          $(".ball").css({ "top": velY});
+          console.log(velY);
+        }*/
+
+        if (posY<0) {
+          posY=-posY;
+          $(".ball").css({ "top": posY});
+          console.log(posY);
+        }
+
+        
+        if (posY>y-ballY) {
+          posY=-posY;
+          $(".ball").css({/*"left" : -velX,*/ "top": posY});
+          console.log(posY);
+          
+        }
+
+        
+
+        /*if (y=document.getElementById('stage').offsetHeight) {
+          $(".ball").css({"left" : "ballX", "top": "ballX"});
+            }
+
+        if (y<=document.getElementById('stage').offsetBottom) {
+          
+          $(".ball").css({"left" : "+=1", "top": "-=1"});
+          }*/
+
+        
+          
+    
+    
+      }, 30);
+
+      }
+
+    }); 
+    
+
+        //console.log(ballPos);
+      /*ballPos=0;
+        ballPos+=5.5;
+      /*if (ballPos>=document.getElementById('stage').offsetWidth /*&& ballPos>=document.getElementById('stage').offsetHeight) {
+        $(".ball").css({"left" : "-=5", "top": "+=5"});
+      }*/
+      
+
+
+        /*if (ballPos==document.getElementById('bar').offsetHeight) {
+        
+        $(".ball").css({"left" : "+=1", "top": "-=1"});
+        }
+        /*if (ballPos>=document.getElementById('stage').offsetWidth /*&& ballPos>=document.getElementById('stage').offsetHeight*) {
+        $(".ball").css({"left" : "-=5", "top": "+=5"});
+      }*/
+    
+    
+    /*if (ballPos||ballPos||ballPos==0) {
+       ballPos=0;
+    setInterval(function(){ 
+      $(".ball").css({left:ballPos++, bottom:ballPos++});
+     }, 100);
+    }*/
+
+
+    
+
+    
+
+
+  </script>
   </body>
 </html>

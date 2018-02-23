@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <link rel="stylesheet" href="style.css">
+	<title></title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script>
+		var stage=[
+			[{life:1},{life:2},{life:3}],
+			[{life:1},{life:2},{life:3}],
+			[{life:1},{life:2},{life:3}],
+			[{life:1},{life:2},{life:3}],
+			[{life:1},{life:2},{life:3}],
+			[{life:1},{life:2},{life:3}],
+		];
+		$("#stage").ready(function() {
+
+		/*var row=3;
+		var column=6;
+
+		for (var i = 0; i < row; i++) {
+		 	 $("#stage").append("<br>");
+			for (var j = 0; j < column; j++) {
+				$("#stage").append("<div class='b' data-life='Math.floor((Math.random() * 3) + 1);'></div>");
+
+			} 		 	
+		 } */
+
+		 for (var i = 0; i < stage[0].length; i++) {
+		 	 
+		 	$("#stage").append("<br>");
+			for (var j = 0; j < stage.length; j++) {
+				$("#stage").append("<div class='block' data-life=stage[i][j]></div>");
+				$("#stage").click(function(){
+        			console.log($(this).find(".block").attr("data-life"));
+   				});
+			} 		 	
+		 }
+		 //$("#3").append("<div style='background-color:pink;width:20px;height:10px;aling:center;'></div><br>");
+		 //var life=
+		 $("#stage").append("<div class='ball' id='ball'></div>");
+		 $("#stage").append("<div class='bar' id='bar'></div>");
+		});
+
+
+
+		$(document).keydown(function( event ) {
+  			if ( event.which == 37) {
+     			$(".bar").css({"left" : "-=10"});
+ 		 	}
+
+	 		if ( event.which == 39) {
+	     		$(".bar").css({"left": "+=10"});
+	 		}
+		});
+
+		$(document).keydown(function( event ) {
+  			if ( event.which == 32) {
+     		
+  				var ballPos=0;
+  				var y=document.getElementById('stage').offsetTop;
+  				var x=document.getElementById('stage').offsetWidth;
+  				var ballY=document.getElementById('ball').offsetWidth;
+  				var ballX=document.getElementById('ball').offsetWidth;
+  				var velX=2;
+  				var velY=2;
+  				var	posX=0;
+  				var posY=0;
+
+			setInterval(function(){ 
+				posX=posX+velX;
+  				posY=posY+velY;
+				
+				$(".ball").css({"left" : "+=2", "top": "-=2"});
+				//$(".ball").css({"left" : velX, "top": +velX});
+				console.log(posY);
+				/*if (velY-ballY<-y) {
+					velY=-velY;
+					$(".ball").css({ "top": velY});
+					console.log(velY);
+				}*/
+
+				/*if (posY<520) {
+					
+					$(".ball").css({ "top": "+=2"});
+					console.log(posY);
+				}*/
+
+				if (posY<0) {
+					posY=-velY;
+					$(".ball").css({"left" : "-=2","top": "-=2" });
+					console.log(posY);
+				}
+
+				
+				if (posY>y-ballY) {
+					posY=-velY;
+					$(".ball").css({/*"left" : -velX,*/"left" : "-=2", "top": "+=2"});
+					console.log(posY);
+					
+				}
+
+				
+
+				/*if (y=document.getElementById('stage').offsetHeight) {
+					$(".ball").css({"left" : "ballX", "top": "ballX"});
+		        }
+
+				if (y<=document.getElementById('stage').offsetBottom) {
+					
+					$(".ball").css({"left" : "+=1", "top": "-=1"});
+			    }*/
+
+			    posX+=velX;
+  				posY+=velY;
+			    
+		
+		
+		 	}, 30);
+
+ 		 	}
+
+	 	});	
+		
+
+   			//console.log(ballPos);
+			/*ballPos=0;
+				ballPos+=5.5;
+			/*if (ballPos>=document.getElementById('stage').offsetWidth /*&& ballPos>=document.getElementById('stage').offsetHeight) {
+				$(".ball").css({"left" : "-=5", "top": "+=5"});
+			}*/
+			
+
+
+		    /*if (ballPos==document.getElementById('bar').offsetHeight) {
+				
+				$(".ball").css({"left" : "+=1", "top": "-=1"});
+		    }
+		    /*if (ballPos>=document.getElementById('stage').offsetWidth /*&& ballPos>=document.getElementById('stage').offsetHeight*) {
+				$(".ball").css({"left" : "-=5", "top": "+=5"});
+			}*/
+		
+		
+		/*if (ballPos||ballPos||ballPos==0) {
+			 ballPos=0;
+		setInterval(function(){ 
+			$(".ball").css({left:ballPos++, bottom:ballPos++});
+		 }, 100);
+		}*/
+
+
+		
+
+		
+
+
+	</script>
+</head>
+<body>
+<div id="stage"></div>
+</body>
+</html>

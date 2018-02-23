@@ -15,5 +15,37 @@
         <li>Add a table with as many rows and columns both Rows and Columns fields indicate</li>
         <li>Each table cell must contain a text like: "Row: X, Col: Y"</li>
       </ol>
+    <table id="table">
+      <tr><td id="row"></td>
+      <td id="column"></td></tr>
+    </table>
+   
+      <input type="text" name="rows" id="rows">
+      <input type="text" name="columns" id="columns">
+      <button id="generateTable">Generate Table</button> 
+   
+
+     <script>
+    
+          document.getElementById("generateTable").addEventListener("click", generateTable); 
+          function generateTable() {
+            var rows=document.getElementById("rows").value;
+            var columns=document.getElementById("columns").value;
+            var table=[];
+            var tableResult;
+            for (var i = 0; i < rows; i++) {
+              for (var j = 0; j < columns; j++) {
+                /*document.write("Row:"+rows[i]);
+                document.write("Col:"+columns[j]);*/
+                table+=/*"Row:X"+*/rows[i];
+                table+=columns[j];
+                console.log(rows[i]);
+                 console.log(rows);
+               // document.getElementById('column').innerHTML=/*"Col:Y"+*/columns[j];
+              }
+            }
+            /*var rowResult +=*/ document.getElementById('row').innerHTML= table; 
+          }
+    </script>
   </body>
 </html>
