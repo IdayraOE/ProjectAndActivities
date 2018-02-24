@@ -120,12 +120,13 @@
                                 $(".letterGoal").html("<div id='correct'>"+wordAnswer.join(" ")+"</div>");
                                 $(".letterGoal").css({"top" : "670px"});
                                 start(words);
-                                 if(JSON.stringify(word)!=JSON.stringify(wordAnswer)){
+
+                                 /*if(JSON.stringify(word)!=JSON.stringify(wordAnswer)){
                                      clearInterval(interval);
                                       $(".container").html("<div id='correcto'>PALABRA INCORRECTA</div>");
                                       $(".container").css({"margin-left" : "25%", "margin-top":"400px","color":"#F85E22","left" : "+=30"});
                                       start(words);
-                                }
+                                }*/
                             } 
                          }); 
 
