@@ -27,8 +27,8 @@
     <script src="wordsKids.js"></script>
 <script>
   var words=['VACA','GATO','PERRO','ERIZO','TORTUGA','CAMALEON'];
-   var random= words[Math.floor(Math.random() * words.length)];
-
+  var random= words[Math.floor(Math.random() * words.length)];
+  function start(words) {
          switch(random) {
           case 'VACA':
               $(".divimg").append('<img src="vaca.png" id="img" class="img">');
@@ -51,14 +51,19 @@
           default:
             $(".divimg").append('<img src="dog.jpg" id="img" class="img">');
       }
+      return random;
+  }   
 
+        $( document ).ready(function() {
+             start(words);
+             console.log(random);
+        
 
       $( "#img" ).click(function() { 
+
           console.log(random);
             var letter = random.split("");
-         if (document.getElementById('time').checked || document.getElementById('rotate').checked) {
-            inicio();
-         }
+        
 
             for (var j = 0; j < letter.length; j++) {
                 $(".container").append("<div class='"+letter[j]+"' id='letter' value='"+letter[j]+"'>"+letter[j]+"</div>");
@@ -69,7 +74,14 @@
                 var letterPos=10;
                 var letterY=10;
 
-                
+                 if (document.getElementById('time').checked || document.getElementById('rotate').checked) {
+             $(".container div").css({"display" : "flex","transform" : "rotate(7deg)"});
+         }
+     }  
+   
+
+      
+        
 
               var interval=setInterval(function(){        
                 letterPos=letterPos+letterY;
@@ -79,13 +91,14 @@
                     if(letterPos>=700){
                           alert("GAME OVER");  
                         clearInterval(interval);
+
                       }/*else{
                         
                       }*/
                      console.log(letterPos);
-                }, 2000);
-              }  
-           var word=[];
+                }, 500);
+                      
+                       var word=[];
 
                           for (var i = 0; i < letter.length; i++) {
                             word.push(letter[i]);
@@ -100,14 +113,25 @@
                             console.log(wordAnswer);
 
                             if (JSON.stringify(word)==JSON.stringify(wordAnswer)) {
-                                alert("¡Muy bien!");
+                                //alert("¡Muy bien!");
                                 clearInterval(interval);
-                            }/*else{
-                              alert("Palabra erronea");
-                            }*/
+                                $(".container").html("<div id='correcto'>CORRECTO</div>");
+                                $(".container").css({"margin-left" : "150px", "margin-top":"400px","color":"#98E2B0","left" : "+=30"});
+                                $(".letterGoal").html("<div id='correct'>"+wordAnswer.join(" ")+"</div>");
+                                $(".letterGoal").css({"top" : "670px"});
+                                start(words);
+                                 if(JSON.stringify(word)!=JSON.stringify(wordAnswer)){
+                                     clearInterval(interval);
+                                      $(".container").html("<div id='correcto'>PALABRA INCORRECTA</div>");
+                                      $(".container").css({"margin-left" : "25%", "margin-top":"400px","color":"#F85E22","left" : "+=30"});
+                                      start(words);
+                                }
+                            } 
                          }); 
 
+
       });
+    });
 
 </script>
 </body>
