@@ -11,9 +11,7 @@
 <!--<img src="dog.jpg" id="img" class="img">-->
 </div>
 <img src="rotar.png" class="rotateImg">
-<img src="cronometro.png" class="timeImg">
 
-<input type="checkbox" name="time" class="time" id="time" value="time">
 <input type="checkbox" name="rotate" class="rotate" id="rotate" value="rotate">
 
 <div class="timeDes" id="timeDes"></div>
@@ -73,14 +71,15 @@
                    
                 var letterPos=10;
                 var letterY=10;
-
-                 if (document.getElementById('time').checked || document.getElementById('rotate').checked) {
-             $(".container div").css({"display" : "flex","transform" : "rotate(7deg)"});
-         }
      }  
-   
+     
 
-      
+
+        if (document.getElementById('rotate').checked) {
+                  var rotate=document.getElementById('rotate').checked;
+                
+                 inicio(rotate);
+         }else{
         
 
               var interval=setInterval(function(){        
@@ -97,6 +96,7 @@
                       }*/
                      console.log(letterPos);
                 }, 500);
+        }
                       
                        var word=[];
 
@@ -116,7 +116,7 @@
                                 //alert("¡Muy bien!");
                                 clearInterval(interval);
                                 $(".container").html("<div id='correcto'>CORRECTO</div>");
-                                $(".container").css({"margin-left" : "150px", "margin-top":"400px","color":"#98E2B0","left" : "+=30"});
+                                $(".container").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "+=30"});
                                 $(".letterGoal").html("<div id='correct'>"+wordAnswer.join(" ")+"</div>");
                                 $(".letterGoal").css({"top" : "670px"});
                                 start(words);

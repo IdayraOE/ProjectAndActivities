@@ -3,11 +3,8 @@ function prueba(){
  console.log(document.getElementById('rotate').checked);
 }
 
-function inicio(time, rotate){
-	if (time==true) {
-
-	}
+function inicio(rotate){
 	if (rotate==true) {
-		
+		$(".container").css({"display" : "flex","transform" : "rotate(360deg)","transition":"transform 30s", "margin-top":"40%"});
 	}
 }
