@@ -5,6 +5,7 @@ function prueba(){
 
 function inicio(rotate){
 	if (rotate==true) {
-		$(".container").css({"display" : "flex","transform" : "rotate(360deg)","transition":"transform 30s", "margin-top":"40%"});
+		$(".container div").css({"display" : "flex","transform" : "rotate(360deg)","transition":"transform 10s", "margin-top":"40%"});
+		//$(".container").css({"display" : "block","transform" : "rotate(360deg)","transition":"transform 30s", "margin-top":"40%"});
 	}
 }
