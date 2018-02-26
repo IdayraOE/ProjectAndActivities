@@ -5,7 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="wordsKids.css">
  
 </head>
-<body>
+<body background="background.jpg">
+<div class="background">
 <h1>WORDS KIDS</h1>
 <div class="divimg">
 <!--<img src="dog.jpg" id="img" class="img">-->
@@ -20,6 +21,7 @@
 <div class="container">
 </div>
 <div class="correctDiv"></div>
+</div>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -106,6 +108,7 @@
                             console.log(word);
                           }
                           var wordAnswer=[];
+                          var wordCorrect=[];
                           $(document).keydown(function( event ) {
                             
                             var key=String.fromCharCode(event.which);
@@ -115,16 +118,17 @@
                             //do{
                                 for (var i = 0; i < word.length; i++) {
                                    for (var j = 0; j < wordAnswer.length; j++) {                         
-                                      if (JSON.stringify(word[i])==JSON.stringify(wordAnswer[j])) {
+                                      if (JSON.stringify(word[i])!=JSON.stringify(wordAnswer[j])) {
                                           //alert("¡Muy bien!");
-                                          
+                                          //wordAnswer.pop();
+                                          $(".correctDiv").html("<div id='correcto'>Prueba otra vez</div>");
+                                        $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%"});
+                                  }else{
+
                                           $(".correctDiv").html("<div id='correcto'>Muy Bien</div>");
                                           $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%"});
                                           $(".letterGoal").html("<div id='correct'>"+wordAnswer.join(" ")+"</div>");
-                                          $(".letterGoal").css({"top" : "670px"});
-                                  }else{
-                                       $(".correctDiv").html("<div id='correcto'>Prueba otra vez</div>");
-                                        $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%"});
+                                          $(".letterGoal").css({"margin-left" : "30px","top" : "80%"});
                                   } 
                                 }
                               }
@@ -134,7 +138,7 @@
                                 if(JSON.stringify(word)==JSON.stringify(wordAnswer)){
                                  clearInterval(interval);
                                   $(".correctDiv").html("<div id='correcto'>CORRECTO</div>");
-                                  $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%","background-image":"url('background.jpg')"});
+                                  $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%"});
                                   start(words);
                                   $( document ).ready(function() {
                                     start(words);
