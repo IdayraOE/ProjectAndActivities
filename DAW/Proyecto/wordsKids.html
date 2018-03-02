@@ -8,9 +8,15 @@
 <body background="background.jpg">
 <div class="background">
 <h1>WORDS KIDS</h1>
+<div class="game">
 <div class="divimg">
 <!--<img src="dog.jpg" id="img" class="img">-->
 </div>
+
+</div>
+
+
+
 <img src="rotar.png" class="rotateImg">
 
 <input type="checkbox" name="rotate" class="rotate" id="rotate" value="rotate">
@@ -28,53 +34,58 @@
     <script src="wordsKids.js"></script>
 <script>
   var words=['VACA','GATO','PERRO','ERIZO','TORTUGA','CAMALEON'];
-  var random= words[Math.floor(Math.random() * words.length)];
+  var random;
   function start(words) {
+	random = words[Math.floor(Math.random() * words.length)];
          switch(random) {
           case 'VACA':
-              $(".divimg").append('<img src="vaca.png" id="img" class="img">');
+              $(".divimg").html('<img src="vaca.png" id="img" class="img">');
               break;
           case 'GATO':
-             $(".divimg").append('<img src="cat.png" id="img" class="img">');
+             $(".divimg").html('<img src="cat.png" id="img" class="img">');
               break;
           case 'PERRO':
-             $(".divimg").append('<img src="dog.png" id="img" class="img">');
+             $(".divimg").html('<img src="dog.png" id="img" class="img">');
               break;
           case 'ERIZO':
-             $(".divimg").append('<img src="erizo.jpg" id="img" class="img">');
+             $(".divimg").html('<img src="erizo.jpg" id="img" class="img">');
               break;
           case 'TORTUGA':
-             $(".divimg").append('<img src="turtle.png" id="img" class="img">');
+             $(".divimg").html('<img src="turtle.png" id="img" class="img">');
               break;
           case 'CAMALEON':
-             $(".divimg").append('<img src="camaleon.jpg" id="img" class="img">');
+             $(".divimg").html('<img src="camaleon.jpg" id="img" class="img">');
               break;
           default:
-            $(".divimg").append('<img src="dog.jpg" id="img" class="img">');
+            $(".divimg").html('<img src="dog.jpg" id="img" class="img">');
       }
+	  $( "#img" ).click(cliqueo);
+	  //reset game
+	  wordAnswer=[];
+	  //...
+	  
       return random;
   }   
-
-        $( document ).ready(function() {
-             start(words);
-             console.log(random);
-        
-
-      $( "#img" ).click(function() { 
+  
+  
+      function cliqueo() { 
+		$( "#img" ).off('click',cliqueo);
 
           console.log(random);
             var letter = random.split("");
         
-
+			var ratio = 100.0/letter.length;
+			
             for (var j = 0; j < letter.length; j++) {
-                $(".container").append("<div class='"+letter[j]+"' id='letter' value='"+letter[j]+"'>"+letter[j]+"</div>");
-                $(".container div").css({"left" : "-=30"});
-                $(".letterGoal").append('<div class="divGoal"></div>');
-                $(".divGoal").css({"left" : "+=30"});
+                $(".game").append("<div class='letter active letter"+j+"' data-value='"+letter[j]+"'>"+letter[j]+"</div>");
+                $(".letter"+j).css({"left" : ratio*j+'%', "animation-delay": Math.floor(Math.random() * 6) +'s'});
+                $(".game").append('<div class="divGoal divGoal'+j+'"></div>');
+                $(".divGoal"+j).css({"left" : ratio*j+'%'});
                    
                 var letterPos=10;
                 var letterY=10;
-     }  
+			}
+			$(".letter, .divGoal").css({"width" : ratio +'%'});
      
 
 
@@ -88,7 +99,7 @@
               var interval=setInterval(function(){        
                 letterPos=letterPos+letterY;
 
-                  $(".container").css({"top" : "+=10"});
+                  $(".active").css({"top" : "+=10"});
 
                     if(letterPos>=700){
                           alert("GAME OVER");  
@@ -112,8 +123,12 @@
                           $(document).keydown(function( event ) {
                             
                             var key=String.fromCharCode(event.which);
-
-                            wordAnswer.push(key);
+							if (word[wordAnswer.length] == key){
+								$(".letter"+ wordAnswer.length).removeClass('active').css({bottom:'90%', "top" : "initial"}).css({'bottom': '10px'});
+								
+								wordAnswer.push(key);
+								
+							}
                             console.log(wordAnswer);
                             //do{
                                 for (var i = 0; i < word.length; i++) {
@@ -123,13 +138,13 @@
                                           //wordAnswer.pop();
                                           $(".correctDiv").html("<div id='correcto'>Prueba otra vez</div>");
                                         $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%"});
-                                  }else{
+                                  }/*else{
 
                                           $(".correctDiv").html("<div id='correcto'>Muy Bien</div>");
                                           $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%"});
                                           $(".letterGoal").html("<div id='correct'>"+wordAnswer.join(" ")+"</div>");
                                           $(".letterGoal").css({"margin-left" : "30px","top" : "80%"});
-                                  } 
+                                  } */
                                 }
                               }
                           //}while(JSON.stringify(word)!=JSON.stringify(wordAnswer));
@@ -139,16 +154,19 @@
                                  clearInterval(interval);
                                   $(".correctDiv").html("<div id='correcto'>CORRECTO</div>");
                                   $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%"});
+								  //setTimeout(function(){window.location.reload()}, 1000);
                                   start(words);
-                                  $( document ).ready(function() {
-                                    start(words);
-                                  }); 
                                 }
                                
                          }); 
 
 
-      });
+      };
+
+        $( document ).ready(function() {
+             start(words);
+             console.log(random);
+        
     });
 
 </script>
