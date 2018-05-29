@@ -1,10 +1,9 @@
 #stage{
-	position: absolute;
+	margin: 0 auto;
 	background-color: #9B92F2;
-	top: 10%;
-	left: 30%;
-	width: 700px;
-	height: 520px;
+	margin-top: 25vh;
+	width: 60vw;
+	height: 75vh;
 	
 }
 

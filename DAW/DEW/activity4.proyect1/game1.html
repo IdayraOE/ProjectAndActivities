@@ -58,67 +58,53 @@
 
 		$(document).keydown(function( event ) {
   			if ( event.which == 32) {
-     		
-  				var ballPos=0;
-  				var y=document.getElementById('stage').offsetTop;
-  				var x=document.getElementById('stage').offsetWidth;
-  				var ballY=document.getElementById('ball').offsetWidth;
+     			var barY=document.getElementById('bar').offsetHeight;
   				var ballX=document.getElementById('ball').offsetWidth;
-  				var velX=2;
-  				var velY=2;
-  				var	posX=0;
-  				var posY=0;
+  				var ballPos=($('#ball').get(0)).getBoundingClientRect();
+  				var stage=($('#stage').get(0)).getBoundingClientRect();
+  				ballPos.y=stage.bottom-(ballX+barY);
+  				ballPos.x=stage.left;
+  				console.log(ballPos.x);
+  				console.log(ballPos.y);
+
+  				
+  				var velX=1;
+  				var velY=-1;
 
 			setInterval(function(){ 
-				posX=posX+velX;
-  				posY=posY+velY;
 				
-				$(".ball").css({"left" : "+=2", "top": "-=2"});
-				//$(".ball").css({"left" : velX, "top": +velX});
-				console.log(posY);
-				/*if (velY-ballY<-y) {
+				$(".ball").css({"left" : ballPos.x, "top": ballPos.y});
+
+				
+
+				if (ballPos.y<stage.top) {
 					velY=-velY;
-					$(".ball").css({ "top": velY});
-					console.log(velY);
-				}*/
-
-				/*if (posY<520) {
 					
-					$(".ball").css({ "top": "+=2"});
-					console.log(posY);
-				}*/
-
-				if (posY<0) {
-					posY=-velY;
-					$(".ball").css({"left" : "-=2","top": "-=2" });
-					console.log(posY);
-				}
-
-				
-				if (posY>y-ballY) {
-					posY=-velY;
-					$(".ball").css({/*"left" : -velX,*/"left" : "-=2", "top": "+=2"});
-					console.log(posY);
 					
 				}
 
-				
-
-				/*if (y=document.getElementById('stage').offsetHeight) {
-					$(".ball").css({"left" : "ballX", "top": "ballX"});
-		        }
-
-				if (y<=document.getElementById('stage').offsetBottom) {
+				if (ballPos.x>stage.right-ballX) {
+					velX=-velX;
 					
-					$(".ball").css({"left" : "+=1", "top": "-=1"});
-			    }*/
+				}
 
-			    posX+=velX;
-  				posY+=velY;
+				if (ballPos.y>stage.bottom-ballX) {
+					velY=-velY;
+					
+				}
+
+				if (ballPos.x<stage.left) {
+					velX=-velX;
+					
+					
+				}
 			    
+			    ballPos.x += velX;
+
+			    ballPos.y += velY;
 		
 		
-		 	}, 30);
+		 	}, 9);
 
  		 	}
 

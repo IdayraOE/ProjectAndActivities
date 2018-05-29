@@ -21,23 +21,33 @@
 
 <input type="checkbox" name="rotate" class="rotate" id="rotate" value="rotate">
 
-<div class="timeDes" id="timeDes"></div>
-<!--<div class="letter" id="letter"></div>-->
-<div class="letterGoal" id="letterGoal"></div>
-<div class="container">
-</div>
 <div class="correctDiv"></div>
 </div>
+
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="wordsKids.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="wordsKids.js"></script>
 <script>
-  var words=['VACA','GATO','PERRO','ERIZO','TORTUGA','CAMALEON'];
+  //var words=['VACA','GATO','PERRO','ERIZO','TORTUGA','CAMALEON'];
+  var words = [{ "animal":"VACA", "img":"vaca.png"},{ "animal":"GATO", "img":"cat.png"},{ "animal":"PERRO", "img":"dog.png"},{ "animal":"ERIZO", "img":"erizo.jpg"},{ "animal":"TORTUGA", "img":"turtle.png"},{ "animal":"CAMALEON", "img":"camaleon.jpg"}];
   var random;
+  var img=[];
   function start(words) {
 	random = words[Math.floor(Math.random() * words.length)];
-         switch(random) {
+	console.log(random.img);
+	$(".divimg").html('<img src="'+random.img+'" id="img" class="img">');
+	   /*jQuery.getJSON("animals.json", function(data,random){
+        jQuery.each(data, function(key,val){
+        img.push(val.img);
+        if (JSON.stringify(random.img)==JSON.stringify(val.img)){
+        console.log(random);
+	   	$(".divimg").html('<img src="'+JSON.stringify(val.img)+'" id="img" class="img">');
+       	}
+        });
+      }); 
+	//$(".divimg").html('<img src="vaca.png" id="img" class="img">');
+         /*switch(random) {
           case 'VACA':
               $(".divimg").html('<img src="vaca.png" id="img" class="img">');
               break;
@@ -58,112 +68,17 @@
               break;
           default:
             $(".divimg").html('<img src="dog.jpg" id="img" class="img">');
-      }
-	  $( "#img" ).click(cliqueo);
+      }*/
+
+	  $( "#img" ).click(clickOnTheImage);
 	  //reset game
-	  wordAnswer=[];
+	  $(".letter").html('');
 	  //...
 	  
-      return random;
+     // return random;
   }   
   
-  
-      function cliqueo() { 
-		$( "#img" ).off('click',cliqueo);
-
-          console.log(random);
-            var letter = random.split("");
-        
-			var ratio = 100.0/letter.length;
-			
-            for (var j = 0; j < letter.length; j++) {
-                $(".game").append("<div class='letter active letter"+j+"' data-value='"+letter[j]+"'>"+letter[j]+"</div>");
-                $(".letter"+j).css({"left" : ratio*j+'%', "animation-delay": Math.floor(Math.random() * 6) +'s'});
-                $(".game").append('<div class="divGoal divGoal'+j+'"></div>');
-                $(".divGoal"+j).css({"left" : ratio*j+'%'});
-                   
-                var letterPos=10;
-                var letterY=10;
-			}
-			$(".letter, .divGoal").css({"width" : ratio +'%'});
-     
-
-
-        if (document.getElementById('rotate').checked) {
-                  var rotate=document.getElementById('rotate').checked;
-                
-                 inicio(rotate);
-         }else{
-        
-
-              var interval=setInterval(function(){        
-                letterPos=letterPos+letterY;
-
-                  $(".active").css({"top" : "+=10"});
-
-                    if(letterPos>=700){
-                          alert("GAME OVER");  
-                        clearInterval(interval);
-
-                      }/*else{
-                        
-                      }*/
-                     console.log(letterPos);
-                }, 500);
-        }
-                      
-                       var word=[];
-
-                          for (var i = 0; i < letter.length; i++) {
-                            word.push(letter[i]);
-                            console.log(word);
-                          }
-                          var wordAnswer=[];
-                          var wordCorrect=[];
-                          $(document).keydown(function( event ) {
-                            
-                            var key=String.fromCharCode(event.which);
-							if (word[wordAnswer.length] == key){
-								$(".letter"+ wordAnswer.length).removeClass('active').css({bottom:'90%', "top" : "initial"}).css({'bottom': '10px'});
-								
-								wordAnswer.push(key);
-								
-							}
-                            console.log(wordAnswer);
-                            //do{
-                                for (var i = 0; i < word.length; i++) {
-                                   for (var j = 0; j < wordAnswer.length; j++) {                         
-                                      if (JSON.stringify(word[i])!=JSON.stringify(wordAnswer[j])) {
-                                          //alert("¡Muy bien!");
-                                          //wordAnswer.pop();
-                                          $(".correctDiv").html("<div id='correcto'>Prueba otra vez</div>");
-                                        $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%"});
-                                  }/*else{
-
-                                          $(".correctDiv").html("<div id='correcto'>Muy Bien</div>");
-                                          $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%"});
-                                          $(".letterGoal").html("<div id='correct'>"+wordAnswer.join(" ")+"</div>");
-                                          $(".letterGoal").css({"margin-left" : "30px","top" : "80%"});
-                                  } */
-                                }
-                              }
-                          //}while(JSON.stringify(word)!=JSON.stringify(wordAnswer));
-                                      
-
-                                if(JSON.stringify(word)==JSON.stringify(wordAnswer)){
-                                 clearInterval(interval);
-                                  $(".correctDiv").html("<div id='correcto'>CORRECTO</div>");
-                                  $(".correctDiv").css({"margin-left" : "150px", "top":"400px","color":"#98E2B0","left" : "30%"});
-								  //setTimeout(function(){window.location.reload()}, 1000);
-                                  start(words);
-                                }
-                               
-                         }); 
-
-
-      };
-
-        $( document ).ready(function() {
+    $( document ).ready(function() {
              start(words);
              console.log(random);
         
